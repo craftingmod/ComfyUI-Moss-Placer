@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2025",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2025"],
+    "module": "ESNext",
+    "types": ["@comfyorg/comfyui-frontend-types"],
+
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "rootDirs": [".", "../.generated"],
+    "paths": {
+      "@pages/*": ["./pages/*"],
+      "@components/*": ["./components/*"],
+      "@/*": ["./*", "../.generated/*"]
+    },
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../.generated/**/*.ts"]
+}

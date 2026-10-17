@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[project]
+name = "comfyui-custom-node-template"
+description = "A Bun and Python template for a ComfyUI V3 custom node"
+dynamic = ["version"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+strict = true
+# Keep named tag suffixes such as -react as local metadata, not prerelease stages.
+pattern = '(?i)^v(?P<base>\d+\.\d+\.\d+)(?:[-._]?(?P<stage>alpha|beta|preview|pre|rc|a|b|c|post|rev|r|dev)[-._]?(?P<revision>\d+)?)?(?:[-+](?P<tagged_metadata>[a-z0-9]+(?:[-._][a-z0-9]+)*))?$'
+tagged-metadata = true
+
+[project.urls]
+Repository = "https://github.com/your-name/your-repo"
+
+[tool.comfy]
+PublisherId = "your-username"
+DisplayName = "My Custom Node"
+Icon = "https://cdn.jsdelivr.net/gh/your-name/your-repo/assets/icon.svg"
+includes = ["dist", "backend/_version.py"]
+
+[tool.comfy.version]
+path = "backend/_version.py"
+
+[dependency-groups]
+dev = ["pytest>=9.1.1", "pytest-xdist>=3.8.0", "ruff>=0.16.3", "ty>=0.0.85"]
+
+[tool.ty.analysis]
+# ComfyUI supplies this API at runtime; pytest installs an in-memory test double.
+allowed-unresolved-imports = ["comfy_api.**"]
